@@ -2,5 +2,5 @@
 > UI Automation using Cucumber, Java and Selenium
 
 ```
-Convert Selenium Test into Cucumber BDD Style test
+Page Object Design Pattern with Selenium PageFactory in Cucumber
 ```
