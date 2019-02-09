@@ -36,6 +36,6 @@ buildNumber.properties
 hs_err_pid*
 
 *.settings/
-*.DS_Store/
-*.classpath/
-*.project/
+*.DS_Store
+*.classpath
+*.project
