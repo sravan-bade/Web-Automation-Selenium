@@ -25,7 +25,7 @@ deploy:
   project-name: "Web-Automation-Selenium"
   name: "$(git log --format=%h -1)"
   on:
-    all_branches: true
+    branch: master
 notifications:
   slack:
     rooms:
