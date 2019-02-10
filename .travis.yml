@@ -18,9 +18,7 @@ deploy:
   provider: releases
   api_key: ${api_key}
   file:
-    - "Test_Results.txt"
-    - "test_run.log"
-    - "test_error.log"
+    - target/cucumber-reports/report.html
   skip_cleanup: true
   project-name: "Web-Automation-Selenium"
   name: "$(git log --format=%h -1)"
