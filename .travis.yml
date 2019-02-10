@@ -1,0 +1,39 @@
+language: java
+sudo: false
+
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+script: mvn clean test
+
+before_deploy:
+  # Set up git user name and tag this commit
+  if ! [[ $TRAVIS_TAG ]]; then
+        export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)} &&
+        git config --local user.name "sravan-bade" &&
+        git config --local user.email "sravan-bade1@gmail.com" &&
+        git tag -a "$TRAVIS_TAG" -m "New updates are in progress";
+      fi
+deploy:
+  provider: releases
+  api_key: ${api_key}
+  file:
+    - "Test_Results.txt"
+    - "test_run.log"
+    - "test_error.log"
+  skip_cleanup: true
+  project-name: "Web-Automation-Selenium"
+  name: "$(git log --format=%h -1)"
+  on:
+    all_branches: true
+notifications:
+  slack:
+    rooms:
+      - automation-sravan:ileYh2eClUTRWYguPVX4xgfa
+      - automation-sravan:ileYh2eClUTRWYguPVX4xgfa#automation
+  email:
+    recipients:
+      - sravan.bade1@gmail.com
+      - sravankumarreddy.bade@gmail.com
+    on_success: always # default: change
+    on_failure: always # default: always
