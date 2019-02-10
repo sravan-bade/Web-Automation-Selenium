@@ -3,6 +3,8 @@ package stepDefinitions;
 import cucumber.TestContext;
 import cucumber.api.java.en.When;
 import pageObjects.CheckoutPage;
+import managers.FileReaderManager;
+import testDataTypes.Customer;
 
 public class CheckoutPageSteps {
 	TestContext testContext;
@@ -13,9 +15,10 @@ public class CheckoutPageSteps {
 		checkoutPage = testContext.getPageObjectManager().getCheckoutPage();
 	}
 
-	@When("^enter personal details on checkout page$")
-	public void enter_personal_details_on_checkout_page() {
-		checkoutPage.fill_PersonalDetails();
+	@When("^enter \\\"(.*)\\\" personal details on checkout page$")
+	public void enter_personal_details_on_checkout_page(String customerName) {
+		Customer customer = FileReaderManager.getInstance().getJsonReader().getCustomerByName(customerName);
+		checkoutPage.fill_PersonalDetails(customer);
 	}
 
 	@When("^select same delivery address$")
