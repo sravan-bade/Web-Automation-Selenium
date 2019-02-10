@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import managers.PageObjectManager;
-import managers.WebDriverManager;
+import managers.WebdriverManager;
 import pageObjects.CartPage;
 import pageObjects.CheckoutPage;
 import pageObjects.HomePage;
@@ -17,12 +17,12 @@ public class Steps {
 	CartPage cartPage;
 	CheckoutPage checkoutPage;
 	PageObjectManager pageObjectManager;
-	WebDriverManager webDriverManager;
+	WebdriverManager WebdriverManager;
 
 	@Given("^user is on Home Page$")
 	public void user_is_on_Home_Page() {
-		webDriverManager = new WebDriverManager();
-		driver = webDriverManager.getDriver();
+		WebdriverManager = new WebdriverManager();
+		driver = WebdriverManager.getDriver();
 		pageObjectManager = new PageObjectManager(driver);
 		homePage = pageObjectManager.getHomePage();
 		homePage.navigateTo_HomePage();
@@ -67,6 +67,6 @@ public class Steps {
 	public void place_the_order() {
 		checkoutPage.check_TermsAndCondition(true);
 		checkoutPage.clickOn_PlaceOrder();
-		webDriverManager.quitDriver();
+		WebdriverManager.quitDriver();
 	}
 }

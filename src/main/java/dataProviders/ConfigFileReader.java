@@ -35,34 +35,24 @@ public class ConfigFileReader {
 		String os = System.getProperty("os.name").toLowerCase();
 		String browserName = properties.getProperty("browser");
 		if (os.contains("mac")) {
-			if (browserName.equals("chrome"))
-				driverPath = properties.getProperty("macChromeDriverPath");
-			else if (browserName.equals("firefox"))
-				driverPath = properties.getProperty("macFirefoxDriverPath");	
-		} else if (os.contains("windows")){
-			if (browserName.equals("chrome"))
-				driverPath = properties.getProperty("windowsChromeDriverPath");
-			else if (browserName.equals("firefox"))
-				driverPath = properties.getProperty("windowsFirefoxDriverPath");
-			else if (browserName.equals("iexplorer"))
-				driverPath = properties.getProperty("windowsIEDriverPath");
-			else if (browserName.equals("edge"))
-				driverPath = properties.getProperty("windowsEdgeDriverPath");
+			if (browserName.equals("phantomjs")) {
+				driverPath = properties.getProperty("macPhantomJSPath");
+				return driverPath;
+			} else {
+				throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
+			}
 		}
-		if (driverPath != null)
-			return driverPath;
+		else if (os.contains("windows")){
+			if (browserName.equals("phantomjs")) {
+				driverPath = properties.getProperty("windowsPhantomJSPath");
+				return driverPath;
+			}else {
+				throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
+			}
+		}
 		else
-			throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
+			throw new RuntimeException("PhantomJS driverPath Configured for only Windows and Mac.");
 	}
-
-	/*
-	 * public long getImplicitlyWait() { String implicitlyWait =
-	 * properties.getProperty("implicitlyWait"); if(implicitlyWait != null) return
-	 * Long.parseLong(implicitlyWait); else throw new
-	 * RuntimeException("implicitlyWait not specified in the Configuration.properties file."
-	 * ); }
-	 */
-
 	public long getImplicitlyWait() {
 		String implicitlyWait = properties.getProperty("implicitlyWait");
 		if (implicitlyWait != null) {
@@ -96,6 +86,13 @@ public class ConfigFileReader {
 			return DriverType.EDGE;
 		else if (browserName.equals("safari"))
 			return DriverType.SAFARI;
+		else if (browserName.equals("opera"))
+			return DriverType.OPERA;
+		else if (browserName.equals("phantomjs"))
+			return DriverType.PHANTOMJS;
+		else if (browserName.equals("chrome_headless"))
+			return DriverType.CHROME_HEADLESS;
+		
 		else
 			throw new RuntimeException(
 					"Browser Name Key value in Configuration.properties is not matched : " + browserName);
