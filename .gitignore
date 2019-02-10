@@ -39,3 +39,4 @@ hs_err_pid*
 *.DS_Store
 *.classpath
 *.project
+phantomjs-2.1.1-linux-x86_64.tar.bz2
