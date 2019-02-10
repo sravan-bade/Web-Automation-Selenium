@@ -6,13 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigFileReader {
-	
-	private Properties properties;
-	private final String propertyFilePath= "configs//Configuration.properties";
+import enums.DriverType;
+import enums.EnvironmentType;
 
-	
-	public ConfigFileReader(){
+public class ConfigFileReader {
+	private Properties properties;
+	private final String propertyFilePath = "configs//Configuration.properties";
+
+	public ConfigFileReader() {
 		BufferedReader reader;
 		try {
 			reader = new BufferedReader(new FileReader(propertyFilePath));
@@ -26,31 +27,96 @@ public class ConfigFileReader {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
-		}		
-	}
-	
-	public String getDriverPath(){
-		String driverPath;
-		String os = System.getProperty("os.name").toLowerCase();
-		if(os.contains("mac")) {
-    	  driverPath = properties.getProperty("macChromeDriverPath");
-		}else {
-		  driverPath = properties.getProperty("windowsChromeDriverPath");
 		}
-		if(driverPath!= null) return driverPath;
-		else throw new RuntimeException("driverPath not specified in the Configuration.properties file.");		
 	}
-	
-	public long getImplicitlyWait() {		
+
+	public String getDriverPath() {
+		String driverPath = null;
+		String os = System.getProperty("os.name").toLowerCase();
+		String browserName = properties.getProperty("browser");
+		if (os.contains("mac")) {
+			if (browserName.equals("chrome"))
+				driverPath = properties.getProperty("macChromeDriverPath");
+			else if (browserName.equals("firefox"))
+				driverPath = properties.getProperty("macFirefoxDriverPath");	
+		} else if (os.contains("windows")){
+			if (browserName.equals("chrome"))
+				driverPath = properties.getProperty("windowsChromeDriverPath");
+			else if (browserName.equals("firefox"))
+				driverPath = properties.getProperty("windowsFirefoxDriverPath");
+			else if (browserName.equals("iexplorer"))
+				driverPath = properties.getProperty("windowsIEDriverPath");
+			else if (browserName.equals("edge"))
+				driverPath = properties.getProperty("windowsEdgeDriverPath");
+		}
+		if (driverPath != null)
+			return driverPath;
+		else
+			throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
+	}
+
+	/*
+	 * public long getImplicitlyWait() { String implicitlyWait =
+	 * properties.getProperty("implicitlyWait"); if(implicitlyWait != null) return
+	 * Long.parseLong(implicitlyWait); else throw new
+	 * RuntimeException("implicitlyWait not specified in the Configuration.properties file."
+	 * ); }
+	 */
+
+	public long getImplicitlyWait() {
 		String implicitlyWait = properties.getProperty("implicitlyWait");
-		if(implicitlyWait != null) return Long.parseLong(implicitlyWait);
-		else throw new RuntimeException("implicitlyWait not specified in the Configuration.properties file.");		
+		if (implicitlyWait != null) {
+			try {
+				return Long.parseLong(implicitlyWait);
+			} catch (NumberFormatException e) {
+				throw new RuntimeException("Not able to parse value : " + implicitlyWait + " in to Long");
+			}
+		}
+		return 30;
 	}
-	
+
 	public String getApplicationUrl() {
 		String url = properties.getProperty("url");
-		if(url != null) return url;
-		else throw new RuntimeException("url not specified in the Configuration.properties file.");
+		if (url != null)
+			return url;
+		else
+			throw new RuntimeException(
+					"Application Url not specified in the Configuration.properties file for the Key:url");
+	}
+
+	public DriverType getBrowser() {
+		String browserName = properties.getProperty("browser");
+		if (browserName == null || browserName.equals("chrome"))
+			return DriverType.CHROME;
+		else if (browserName.equalsIgnoreCase("firefox"))
+			return DriverType.FIREFOX;
+		else if (browserName.equals("iexplorer"))
+			return DriverType.INTERNETEXPLORER;
+		else if (browserName.equals("edge"))
+			return DriverType.EDGE;
+		else if (browserName.equals("safari"))
+			return DriverType.SAFARI;
+		else
+			throw new RuntimeException(
+					"Browser Name Key value in Configuration.properties is not matched : " + browserName);
+	}
+
+	public EnvironmentType getEnvironment() {
+		String environmentName = properties.getProperty("environment");
+		if (environmentName == null || environmentName.equalsIgnoreCase("local"))
+			return EnvironmentType.LOCAL;
+		else if (environmentName.equals("remote"))
+			return EnvironmentType.REMOTE;
+		else
+			throw new RuntimeException(
+					"Environment Type Key value in Configuration.properties is not matched : " + environmentName);
+	}
+
+	public Boolean getBrowserWindowSize() {
+		String windowSize = properties.getProperty("windowMaximize");
+		if (windowSize != null)
+			return Boolean.valueOf(windowSize);
+		return true;
 	}
 
 }
