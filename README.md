@@ -1,17 +1,18 @@
 # Web-Automation-Selenium
 > UI Automation using Cucumber, Java and Selenium
 
-##Read Configurations from Property File
-It is dangerous to store hard coded values in the project, also it is against the coding principles. And so far we have been using a lot of hard coded values in our code. With the help of properties file, we will be eliminating these hard coded value one by one.
+## File Reader Manager as Singleton Design Pattern
+
+Sometimes it’s appropriate to have exactly one instance of a class. These are accessed by disparate objects throughout a software system, and therefore require a global point of access. In our case, we have ConfigReaderFile, which should be accessed globally. But later on in this Selenium Cucumber Framework series we will be having many more file readers. So it is better to have a File Reader Manager above all the File Readers. And it is better to make the manager class as singleton.  
 
  
-###What is a Property file in Java
-.properties files are mainly used in Java programs to maintain project configuration data, database config or project settings etc. Each parameter in properties file are stored as a pair of strings, in key-value pair format, where each key is on one line. You can easily read properties from some file using object of type Properties. This is a utility provided by Java itself.
+### What is Singleton Design Patter?
+The Singleton’s purpose is to control object creation, limiting the number of objects to only one. Since there is only one Singleton instance, any instance fields of a Singleton will occur only once per class, just like static fields.
 
-java.util.Properties;
+ 
+### How to implement Singleton Pattern?
+To implement Singleton pattern, we have different approaches but all of them have following common concepts.
 
-
-###Advantages of Property file in Java
-If any information is changed from the properties file, you don’t need to recompile the java class. In other words, the advantage of using properties file is we can configure things which are prone to change over a period of time without need of changing anything in code.
-
-For E.g. We keep application Url in property file, so in case you want to run test from on other test environment, just change the Url in property file and that’s it. You do not require to build the whole project again.
+Private constructor to restrict instantiation of the class from other classes.
+Private static variable of the same class that is the only instance of the class.
+Public static method that returns the instance of the class, this is the global access point for outer world to get the instance of the singleton class.
