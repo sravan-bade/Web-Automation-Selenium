@@ -8,3 +8,4 @@ The simplest explanation of data-driven testing is this: data that is external t
 
 ## Why JSON over Excel?
 In most of our tutorials on Data Driven Testing, we have used Excel – Apache POI. But there are other medium as well to store data in to files such as csv, xml, json, text file etc. Excel is good to manage data and to use but it comes with its own limitations. Like MS Office needs to be installed on the system where the tests are being executed. This is a big limitation on its own, as the test servers has never bound to have have such dependencies. If test are meant to run on Mac, then again there is different problem. 
+
