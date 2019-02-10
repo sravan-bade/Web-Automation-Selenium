@@ -41,26 +41,24 @@ public class ConfigFileReader {
 			} else {
 				throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
 			}
-		}
-		else if (os.contains("windows")){
+		} else if (os.contains("windows")) {
 			if (browserName.equals("phantomjs")) {
 				driverPath = properties.getProperty("windowsPhantomJSPath");
 				return driverPath;
-			}else {
+			} else {
 				throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
 			}
-		}
-		else if (os.contains("linux")||os.contains("ubuntu")){
+		} else if (os.contains("linux") || os.contains("ubuntu")) {
 			if (browserName.equals("phantomjs")) {
 				driverPath = properties.getProperty("linuxPhantomJSPath");
 				return driverPath;
-			}else {
+			} else {
 				throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
 			}
-		}
-		else
+		} else
 			throw new RuntimeException("PhantomJS driverPath Configured for Windows, Mac and Linux.");
 	}
+
 	public long getImplicitlyWait() {
 		String implicitlyWait = properties.getProperty("implicitlyWait");
 		if (implicitlyWait != null) {
@@ -100,7 +98,7 @@ public class ConfigFileReader {
 			return DriverType.PHANTOMJS;
 		else if (browserName.equals("chrome_headless"))
 			return DriverType.CHROME_HEADLESS;
-		
+
 		else
 			throw new RuntimeException(
 					"Browser Name Key value in Configuration.properties is not matched : " + browserName);
@@ -124,4 +122,12 @@ public class ConfigFileReader {
 		return true;
 	}
 
+	public String getTestDataResourcePath() {
+		String testDataResourcePath = properties.getProperty("testDataResourcePath");
+		if (testDataResourcePath != null)
+			return testDataResourcePath;
+		else
+			throw new RuntimeException(
+					"Test Data Resource Path not specified in the Configuration.properties file for the Key:testDataResourcePath");
+	}
 }
