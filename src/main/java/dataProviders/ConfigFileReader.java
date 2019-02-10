@@ -50,8 +50,16 @@ public class ConfigFileReader {
 				throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
 			}
 		}
+		else if (os.contains("linux")||os.contains("ubuntu")){
+			if (browserName.equals("phantomjs")) {
+				driverPath = properties.getProperty("linuxPhantomJSPath");
+				return driverPath;
+			}else {
+				throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
+			}
+		}
 		else
-			throw new RuntimeException("PhantomJS driverPath Configured for only Windows and Mac.");
+			throw new RuntimeException("PhantomJS driverPath Configured for Windows, Mac and Linux.");
 	}
 	public long getImplicitlyWait() {
 		String implicitlyWait = properties.getProperty("implicitlyWait");
