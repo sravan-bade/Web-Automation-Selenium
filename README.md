@@ -47,3 +47,4 @@ Yeah cool, isn’t it a nice way to find things. Good, now we move forward to ca
 
 ## Handle Ajax call Using JavaScriptExecutor in Selenium?
 Our test will fail tentatively due to these situations. Hence its always wise idea to wait for Ajax call to complete. This can be done using our JavaScriptExecutor interface. The idea is simple, if all the JQuery executions are completed, then it will return jQuery.active == 0 which we can use in our Wait.Until method to wait till the script return as true.
+
