@@ -1,7 +1,7 @@
-Feature: Automated End2End Tests
+Feature: Feature Test 2
   Description: The purpose of this feature is to test End 2 End integration.
 
-  Scenario Outline: Customer place an order by purchasing an item from search
+  Scenario Outline: Scenario from Feature Test 2
     Given user is on Home Page
     When he search for "dress"
     #And choose to buy the first item
