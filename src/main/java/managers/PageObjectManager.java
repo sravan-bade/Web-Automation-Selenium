@@ -5,6 +5,7 @@ import pageObjects.CartPage;
 import pageObjects.CheckoutPage;
 import pageObjects.HomePage;
 import pageObjects.ProductListingPage;
+import pageObjects.SampleDownloadPage;
 import pageObjects.ConfirmationPage;
 
 public class PageObjectManager {
@@ -15,6 +16,7 @@ public class PageObjectManager {
 	private HomePage homePage;
 	private CheckoutPage checkoutPage;
 	private ConfirmationPage confirmationPage;
+	private SampleDownloadPage sampleDownloadPage;
 
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -38,5 +40,9 @@ public class PageObjectManager {
 
 	public ConfirmationPage getConfirmationPage() {
 		return (confirmationPage == null) ? confirmationPage = new ConfirmationPage(driver) : confirmationPage;
+	}
+	
+	public SampleDownloadPage getSampleDownloadPage() {
+		return (sampleDownloadPage == null) ? sampleDownloadPage = new SampleDownloadPage(driver) : sampleDownloadPage;
 	}
 }
