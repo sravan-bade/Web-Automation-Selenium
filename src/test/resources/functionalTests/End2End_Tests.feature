@@ -10,3 +10,8 @@ Scenario: Scenario from Feature Test 1
  #And select same delivery address
  #And select payment method as "check" payment
  #And place the order
+ 
+Scenario: Validate the download functionality 
+ Given user is on Sample videos page
+ When he download the file
+ Then file should be downloaded
