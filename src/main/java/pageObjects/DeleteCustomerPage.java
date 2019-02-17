@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.junit.Assert;
 
 import selenium.Choose;
-import selenium.Wait;
 
 public class DeleteCustomerPage {
 	WebDriver driver;
