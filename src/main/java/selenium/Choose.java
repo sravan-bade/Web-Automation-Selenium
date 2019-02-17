@@ -1,8 +1,10 @@
 package selenium;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -48,24 +50,35 @@ public class Choose {
 			Process exec = Runtime.getRuntime().exec(wget_command);
 			int exitVal = exec.waitFor();
 			System.out.println("Exit value: " + exitVal);
+			System.out.println("File download failed");
+			if(exitVal == 1) 
+				Assert.fail();
 		} catch (InterruptedException | IOException ex) {
 			System.out.println(ex.toString());
 		}
 	}
 
 	public static void verifydownload(String fileName) {
+		int count = 1;
 		String downloadPath = System.getProperty("user.dir") + "/target/";
 		System.out.println(downloadPath);
 		File dir = new File(downloadPath);
 		File[] dirContents = dir.listFiles();
-
+		System.out.println(dirContents.length);
 		for (int i = 0; i < dirContents.length; i++) {
+			System.out.println(dirContents[i].getName());
 			if (dirContents[i].getName().equals(fileName)) {
+				System.out.println(dirContents[i].getName());
 				// File has been found, it can now be deleted:
 				System.out.println("File found");
+				count = 0;
 				// dirContents[i].delete();
 				// return true;
 			}
+		}
+		if (count == 1) {
+			System.out.println("File is not available in the download path");
+			Assert.fail();
 		}
 		// return false;
 	}
