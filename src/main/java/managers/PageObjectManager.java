@@ -4,10 +4,12 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.CartPage;
 import pageObjects.CheckoutPage;
 import pageObjects.HomePage;
+import pageObjects.PopupPage;
 import pageObjects.ProductListingPage;
 import pageObjects.SampleDownloadPage;
 import pageObjects.ConfirmationPage;
 import pageObjects.DeleteCustomerPage;
+import pageObjects.PopupPage;
 
 public class PageObjectManager {
 
@@ -19,6 +21,7 @@ public class PageObjectManager {
 	private ConfirmationPage confirmationPage;
 	private SampleDownloadPage sampleDownloadPage;
 	private DeleteCustomerPage deleteCustomerPage;
+	private PopupPage popupPage;
 
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -50,6 +53,10 @@ public class PageObjectManager {
 	
 	public DeleteCustomerPage getDeleteCustomerPage() {
 		return (deleteCustomerPage == null) ? deleteCustomerPage = new DeleteCustomerPage(driver) : deleteCustomerPage;
+	}
+	
+	public PopupPage getPopupPage() {
+		return (popupPage == null) ? popupPage = new PopupPage(driver) : popupPage;
 	}
 
 }

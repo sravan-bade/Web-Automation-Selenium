@@ -4,13 +4,13 @@ Feature: Feature Test1
   Scenario: Scenario from Feature Test 1
     Given user is on Home Page
     When he search for "dress"
-
-  #And choose to buy the first item
-  #And moves to checkout from mini cart
-  #And enter personal details on checkout page
-  #And select same delivery address
-  #And select payment method as "check" payment
-  #And place the order
+	  #And choose to buy the first item
+	  #And moves to checkout from mini cart
+	  #And enter personal details on checkout page
+	  #And select same delivery address
+	  #And select payment method as "check" payment
+	  #And place the order
+	  
   Scenario: Validate the download functionality
     Given user is on Sample videos page
     When he download the file
@@ -25,4 +25,7 @@ Feature: Feature Test1
     Then confirmation alert should be displayed
 
   Scenario: Validate the popup functionality
-    
+    Given user is on Guru99 popup page
+    When clicks popup link
+    And submit form by entering email address as "Test@test.com"
+    Then user should be displayed with access details

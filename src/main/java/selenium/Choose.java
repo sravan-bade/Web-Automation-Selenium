@@ -1,8 +1,9 @@
 package selenium;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -51,7 +52,7 @@ public class Choose {
 			int exitVal = exec.waitFor();
 			System.out.println("Exit value: " + exitVal);
 			System.out.println("File download failed");
-			if(exitVal == 1) 
+			if (exitVal == 1)
 				Assert.fail();
 		} catch (InterruptedException | IOException ex) {
 			System.out.println(ex.toString());
@@ -72,7 +73,7 @@ public class Choose {
 				// File has been found, it can now be deleted:
 				System.out.println("File found");
 				count = 0;
-				// dirContents[i].delete();
+				dirContents[i].delete();
 				// return true;
 			}
 		}
@@ -95,4 +96,33 @@ public class Choose {
 		String alert_text = driver.switchTo().alert().getText();
 		return alert_text;
 	}
+
+	public static String MainWindowHandle(WebDriver driver) {
+		String MainWindow = driver.getWindowHandle();
+		return MainWindow;
+	}
+
+	public static void PopWindowHandle(WebDriver driver, String MainWindow) {
+		Set<String> s1 = driver.getWindowHandles();
+		Iterator<String> i1 = s1.iterator();
+
+		while (i1.hasNext()) {
+			String ChildWindow = i1.next();
+
+			if (!MainWindow.equalsIgnoreCase(ChildWindow)) {
+
+				// Switching to Child window
+				driver.switchTo().window(ChildWindow);
+			}
+		}
+	}
+	
+	public static void closePopup(WebDriver driver) {
+		driver.close();
+	}
+	
+	public static void SwitchToMainWindow(WebDriver driver, String MainWindow) {
+		driver.switchTo().window(MainWindow);
+	}
+	
 }
