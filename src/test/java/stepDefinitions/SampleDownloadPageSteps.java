@@ -6,7 +6,6 @@ import cucumber.TestContext;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pageObjects.HomePage;
 import pageObjects.SampleDownloadPage;
 
 public class SampleDownloadPageSteps {
@@ -28,10 +27,10 @@ public class SampleDownloadPageSteps {
 	public void he_download_the_file() throws InterruptedException, IOException {
 		sampleDownloadPage.download10kbfile();
 	}
-	
+
 	@Then("^file should be downloaded$")
 	public void file_should_be_downloaded() {
-		//homePage.perform_Search(product);
+		// homePage.perform_Search(product);
 		String fileName = "SampleTextFile_10kb.txt";
 		sampleDownloadPage.verifydownloadedfile(fileName);
 	}

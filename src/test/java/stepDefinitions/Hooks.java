@@ -21,7 +21,7 @@ public class Hooks {
 
 	@Before
 	public void beforeScenario(Scenario scenario) {
-		Reporter.assignAuthor("Sravan Kumar Reddy");
+		//Reporter.assignAuthor("Sravan Kumar Reddy");
 	}
 
 	@After(order = 1)

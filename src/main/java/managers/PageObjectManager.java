@@ -7,6 +7,7 @@ import pageObjects.HomePage;
 import pageObjects.ProductListingPage;
 import pageObjects.SampleDownloadPage;
 import pageObjects.ConfirmationPage;
+import pageObjects.DeleteCustomerPage;
 
 public class PageObjectManager {
 
@@ -17,6 +18,7 @@ public class PageObjectManager {
 	private CheckoutPage checkoutPage;
 	private ConfirmationPage confirmationPage;
 	private SampleDownloadPage sampleDownloadPage;
+	private DeleteCustomerPage deleteCustomerPage;
 
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -45,4 +47,9 @@ public class PageObjectManager {
 	public SampleDownloadPage getSampleDownloadPage() {
 		return (sampleDownloadPage == null) ? sampleDownloadPage = new SampleDownloadPage(driver) : sampleDownloadPage;
 	}
+	
+	public DeleteCustomerPage getDeleteCustomerPage() {
+		return (deleteCustomerPage == null) ? deleteCustomerPage = new DeleteCustomerPage(driver) : deleteCustomerPage;
+	}
+
 }
