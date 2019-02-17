@@ -31,7 +31,7 @@ public class SampleDownloadPageSteps {
 	@Then("^file should be downloaded$")
 	public void file_should_be_downloaded() {
 		// homePage.perform_Search(product);
-		String fileName = "SampleTextFile_10kb.txt";
+		String fileName = "Sample-text-file-10kb.txt";
 		sampleDownloadPage.verifydownloadedfile(fileName);
 	}
 
